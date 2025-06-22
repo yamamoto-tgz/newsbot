@@ -5,16 +5,13 @@ from newsbot.gigazine import Gigazine
 from newsbot.hatena import Hatena
 from newsbot.nhk import Nhk
 
-gigazine = Gigazine()
-hatena = Hatena()
-nhk = Nhk()
+rss_list = [Gigazine(), Hatena(), Nhk()]
 
 
 # Cron job
 def job():
-    gigazine.download()
-    hatena.download()
-    nhk.download()
+    for rss in rss_list:
+        rss.download()
 
 
 scheduler = BackgroundScheduler()
@@ -28,17 +25,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    gigazine_items = gigazine.items()
-    hatena_items = hatena.items()
-    nhk_items = nhk.items()
+    items = [item for rss in rss_list for item in rss.items()]
+    items.sort(key=lambda item: item.datetime, reverse=True)
 
-    all_items = gigazine_items + hatena_items + nhk_items
-    all_items.sort(key=lambda item: item.datetime, reverse=True)
+    count = dict([(rss.name, 0) for rss in rss_list])
+    for item in items:
+        count[item.source] += 1
 
-    return render_template(
-        "index.html",
-        items=all_items,
-        gigazine_len=len(gigazine_items),
-        hatena_len=len(hatena_items),
-        nhk_len=len(nhk_items),
-    )
+    return render_template("index.html", items=items, count=count)

@@ -7,9 +7,10 @@ from newsbot.rss import Rss
 
 class Hatena(Rss):
     def __init__(self):
+        name = "hatena"
         url = "https://b.hatena.ne.jp/hotentry/it.rss"
         path = "./rss/hatena_it.xml"
-        super().__init__(url, path)
+        super().__init__(name, url, path)
 
     def items(self):
         items = []
@@ -23,7 +24,7 @@ class Hatena(Rss):
                 )
                 datetime = utc.astimezone(timezone(timedelta(hours=9)))
                 subjects = item["dc:subject"]
-                source = "hatena"
+                source = self.name
 
                 item = Item(title, link, datetime, subjects, source)
 

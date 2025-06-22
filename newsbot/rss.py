@@ -8,7 +8,8 @@ from newsbot.item import Item
 
 
 class Rss(ABC):
-    def __init__(self, url, path):
+    def __init__(self, name, url, path):
+        self.name = name
         self.url = url
         self.path = path
 

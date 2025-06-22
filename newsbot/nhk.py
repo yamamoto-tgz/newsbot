@@ -6,9 +6,10 @@ from newsbot.rss import Rss
 
 class Nhk(Rss):
     def __init__(self):
+        name = "nhk"
         url = "https://www.nhk.or.jp/rss/news/cat0.xml"
         path = "./rss/nhk.xml"
-        super().__init__(url, path)
+        super().__init__(name, url, path)
 
     def items(self):
         items = []
@@ -20,7 +21,7 @@ class Nhk(Rss):
                 print(item["pubDate"])
                 datetime = dt.strptime(item["pubDate"], "%a, %d %b %Y %H:%M:%S %z")
                 subjects = []
-                source = "nhk"
+                source = self.name
 
                 item = Item(title, link, datetime, subjects, source)
 

@@ -11,9 +11,9 @@
     <div class="logo">NEWS BOT</div>
 
     <div class="status">
-      <span>gigazine: {{ gigazine_len }}</span> |
-      <span>hatena: {{ hatena_len }}</span> |
-      <span>nhk: {{ nhk_len }}</span>
+      {% for key, value in count.items() %}
+      <span>{{ key }}: {{ value }}</span>
+      {% if not loop.last %} | {% endif %} {% endfor %}
     </div>
 
     <div class="items">
