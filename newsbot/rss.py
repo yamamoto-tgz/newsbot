@@ -30,7 +30,6 @@ class Rss(ABC):
 
         except Exception as e:
             print(e)
-            os.remove(self.path)
 
     def read(self):
         with open(self.path, "r") as f:
