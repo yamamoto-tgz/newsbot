@@ -1,0 +1,25 @@
+.logo {
+  font-weight: bold;
+  font-size: 35px;
+  padding: 5px 0px 0px 10px;
+}
+
+.status {
+  width: 100%;
+  text-align: right;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  border: #f0f0f0 solid thin;
+  padding: 10px 5px;
+}
+
+.item > p {
+  color: #536471;
+  margin: 0px;
+}

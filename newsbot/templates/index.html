@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <title>newsbot</title>
+  </head>
+  <body>
+    <div class="logo">NEWS BOT</div>
+
+    <div class="status">
+      <span>gigazine: {{ gigazine_len }}</span> |
+      <span>hatena: {{ hatena_len }}</span>
+    </div>
+
+    <div class="items">
+      {% for item in items %}
+      <div class="item">
+        <p>@{{ item.source }} - {{ item.time() }}</p>
+        <p><a href="{{ item.link }}" target="_blank">{{ item.title }}</a></p>
+      </div>
+    </div>
+    {% endfor %}
+  </body>
+</html>
