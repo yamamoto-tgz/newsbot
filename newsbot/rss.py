@@ -19,7 +19,10 @@ class Rss(ABC):
             if not os.path.exists(dir):
                 os.makedirs(dir)
 
-            response = requests.get(self.url)
+            proxy = os.getenv("NB_PROXY")
+            url = f"{proxy}?url={self.url}" if proxy else self.url
+
+            response = requests.get(url)
             print(f"download from {self.url} to {self.path}")
 
             with open(self.path, "wb") as f:
