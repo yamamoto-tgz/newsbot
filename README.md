@@ -14,10 +14,8 @@ $ pip install -r requirements.txt
 | -------- | -------- | ------- |
 | NB_PROXY | false    | None    |
 
-## Example
+## Run
 
 ```
 $ flask --app newsbot.app run
-$ flask --debug --app newsbot.app run
-$ flask -e newsbot.env --app newsbot.app run
 ```
