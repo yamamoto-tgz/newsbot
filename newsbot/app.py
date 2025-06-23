@@ -6,13 +6,23 @@ from newsbot.codezine import Codezine
 from newsbot.gigazine import Gigazine
 from newsbot.gizmode import Gizmode
 from newsbot.hatena import Hatena
+from newsbot.itmedia import Itmedia
 from newsbot.lifehacker import Lifehacker
 from newsbot.nhk import Nhk
 from newsbot.zenn import Zenn
 
 load_dotenv(dotenv_path="newsbot.env")
 
-rss_list = [Codezine(), Gigazine(), Gizmode(), Zenn(), Hatena(), Nhk(), Lifehacker()]
+rss_list = [
+    Gigazine(),
+    Codezine(),
+    Zenn(),
+    Gizmode(),
+    Hatena(),
+    Itmedia(),
+    Lifehacker(),
+    Nhk(),
+]
 
 
 # Cron job
