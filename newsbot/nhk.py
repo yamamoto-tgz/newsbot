@@ -18,7 +18,6 @@ class Nhk(Rss):
             for item in self.read()["rss"]["channel"]["item"]:
                 title = item["title"]
                 link = item["link"]
-                print(item["pubDate"])
                 datetime = dt.strptime(item["pubDate"], "%a, %d %b %Y %H:%M:%S %z")
                 subjects = []
                 source = self.name
