@@ -4,13 +4,15 @@ from flask import Flask, render_template
 
 from newsbot.codezine import Codezine
 from newsbot.gigazine import Gigazine
+from newsbot.gizmode import Gizmode
 from newsbot.hatena import Hatena
+from newsbot.lifehacker import Lifehacker
 from newsbot.nhk import Nhk
 from newsbot.zenn import Zenn
 
 load_dotenv(dotenv_path="newsbot.env")
 
-rss_list = [Gigazine(), Codezine(), Hatena(), Zenn(), Nhk()]
+rss_list = [Codezine(), Gigazine(), Gizmode(), Zenn(), Hatena(), Nhk(), Lifehacker()]
 
 
 # Cron job
