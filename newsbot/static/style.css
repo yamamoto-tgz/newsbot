@@ -1,25 +1,82 @@
+@font-face {
+  font-family: "Technopollas";
+  src: url("technopollas.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Kaiso";
+  src: url("kaiso.woff2") format("woff2");
+}
+
+body {
+  background-color: #000000;
+  margin: 0px;
+}
+
+header {
+  font-family: "Technopollas";
+  background-color: #ffff00;
+  top: 0px;
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  box-shadow: 0px 0px 20px #ffff00;
+}
+
 .logo {
-  font-weight: bold;
   font-size: 35px;
-  padding: 5px 0px 0px 10px;
+  padding: 10px;
+  flex-grow: 1;
 }
 
 .status {
-  width: 100%;
+  flex-grow: 1;
   text-align: right;
+  align-content: end;
+  padding: 5px 10px;
 }
 
 .items {
+  font-family: "Kaiso";
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-top: 75px;
+  gap: 26px;
 }
 
 .item {
-  border: #f0f0f0 solid thin;
-  padding: 10px 5px;
+  background-color: #ffffff;
+  font-size: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 85%;
+  min-height: 90px;
+  padding: 24px;
+  box-shadow: 6px 6px #59d6f3;
 }
 
-.item > p {
-  color: #536471;
-  margin: 0px;
+.item > a {
+  color: #b000a6;
+  font-family: "Kaiso";
+  font-size: 36px;
+  text-decoration: none;
+}
+
+.item > .meta {
+  color: #555555;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Technopollas";
+  font-size: 18px;
+  color: #3c3c3c;
+}
+
+.item > {
+  color: #1783c7;
+  font-size: 28px;
+  text-decoration: none;
 }

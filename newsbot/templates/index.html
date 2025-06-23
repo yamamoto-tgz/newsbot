@@ -8,19 +8,23 @@
     <title>newsbot</title>
   </head>
   <body>
-    <div class="logo">NEWS BOT</div>
-
-    <div class="status">
-      {% for key, value in count.items() %}
-      <span>{{ key }}: {{ value }}</span>
-      {% if not loop.last %} | {% endif %} {% endfor %}
-    </div>
+    <header>
+      <div class="logo">NEWS BOT</div>
+      <div class="status">
+        {% for key, value in count.items() %}
+        <span>{{ key }}: {{ value }}</span>
+        {% if not loop.last %} | {% endif %} {% endfor %}
+      </div>
+    </header>
 
     <div class="items">
       {% for item in items %}
       <div class="item">
-        <p>@{{ item.source }} - {{ item.time() }}</p>
-        <p><a href="{{ item.link }}" target="_blank">{{ item.title }}</a></p>
+        <span class="meta">
+          <span>{{ item.source }}</span>
+          <span>{{ item.time() }}</span>
+        </span>
+        <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
       </div>
       {% endfor %}
     </div>
