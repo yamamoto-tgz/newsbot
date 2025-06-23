@@ -39,6 +39,7 @@ header {
   align-items: end;
   justify-content: end;
   padding: 5px 10px;
+  font-size: 14px;
 }
 
 .count {

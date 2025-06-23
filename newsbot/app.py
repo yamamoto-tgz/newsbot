@@ -2,6 +2,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from dotenv import load_dotenv
 from flask import Flask, render_template
 
+from newsbot.atmarkit import Atmarkit
 from newsbot.codezine import Codezine
 from newsbot.gigazine import Gigazine
 from newsbot.gizmode import Gizmode
@@ -21,6 +22,7 @@ rss_list = [
     Hatena(),
     Itmedia(),
     Lifehacker(),
+    Atmarkit(),
     Nhk(),
 ]
 
