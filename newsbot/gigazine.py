@@ -19,12 +19,9 @@ class Gigazine(Rss):
                 title = item["title"]
                 link = item["link"]
                 datetime = dt.fromisoformat(item["dc:date"])
-                subjects = item["dc:subject"][:-1].split(
-                    ","
-                )  # :-1 => Remove empty value
                 source = self.name
 
-                item = Item(title, link, datetime, subjects, source)
+                item = Item(title, link, datetime, source)
 
                 items.append(item)
 

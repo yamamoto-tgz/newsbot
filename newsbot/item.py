@@ -7,7 +7,6 @@ class Item:
     title: str
     link: str
     datetime: datetime
-    subjects: list[str]
     source: str
 
     def time(self):

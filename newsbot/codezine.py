@@ -19,10 +19,9 @@ class Codezine(Rss):
                 title = item["title"]
                 link = item["link"]
                 datetime = dt.strptime(item["pubDate"], "%a, %d %b %Y %H:%M:%S %z")
-                subjects = []
                 source = self.name
 
-                item = Item(title, link, datetime, subjects, source)
+                item = Item(title, link, datetime, source)
 
                 items.append(item)
 

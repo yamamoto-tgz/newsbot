@@ -23,10 +23,9 @@ class Lifehacker(Rss):
                     tzinfo=timezone.utc
                 )
                 datetime = utc.astimezone(timezone(timedelta(hours=9)))
-                subjects = []
                 source = self.name
 
-                item = Item(title, link, datetime, subjects, source)
+                item = Item(title, link, datetime, source)
 
                 items.append(item)
 
