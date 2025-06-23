@@ -2,13 +2,14 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from dotenv import load_dotenv
 from flask import Flask, render_template
 
+from newsbot.codezine import Codezine
 from newsbot.gigazine import Gigazine
 from newsbot.hatena import Hatena
 from newsbot.nhk import Nhk
 
 load_dotenv(dotenv_path="newsbot.env")
 
-rss_list = [Gigazine(), Hatena(), Nhk()]
+rss_list = [Gigazine(), Codezine(), Hatena(), Nhk()]
 
 
 # Cron job
