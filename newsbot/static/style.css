@@ -1,10 +1,12 @@
 @font-face {
   font-family: "Technopollas";
+  font-display: block;
   src: url("technopollas.woff") format("woff");
 }
 
 @font-face {
   font-family: "Kaiso";
+  font-display: block;
   src: url("kaiso.woff2") format("woff2");
 }
 
@@ -27,14 +29,20 @@ header {
 .logo {
   font-size: 35px;
   padding: 10px;
-  flex-grow: 1;
+  width: 50%;
 }
 
-.status {
-  flex-grow: 1;
-  text-align: right;
-  align-content: end;
+.counter {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: end;
   padding: 5px 10px;
+}
+
+.count {
+  color: #00cc80;
 }
 
 .items {

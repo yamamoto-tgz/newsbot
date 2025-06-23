@@ -33,8 +33,8 @@ def index():
     items = [item for rss in rss_list for item in rss.items()]
     items.sort(key=lambda item: item.datetime, reverse=True)
 
-    count = dict([(rss.name, 0) for rss in rss_list])
+    counter = dict([(rss.name, 0) for rss in rss_list])
     for item in items:
-        count[item.source] += 1
+        counter[item.source] += 1
 
-    return render_template("index.html", items=items, count=count)
+    return render_template("index.html", items=items, counter=counter)

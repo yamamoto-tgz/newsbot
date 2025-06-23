@@ -10,9 +10,12 @@
   <body>
     <header>
       <div class="logo">NEWS BOT</div>
-      <div class="status">
-        {% for key, value in count.items() %}
-        <span>{{ key }}: {{ value }}</span>
+      <div class="counter">
+        {% for name, count in counter.items() %}
+        <span>
+          <span class="name">{{ name }}</span>:
+          <span class="count">{{ count }}</span>
+        </span>
         {% if not loop.last %} | {% endif %} {% endfor %}
       </div>
     </header>
