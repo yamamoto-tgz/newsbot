@@ -5,7 +5,7 @@ from flask import Flask, render_template
 from newsbot.atmarkit import Atmarkit
 from newsbot.codezine import Codezine
 from newsbot.gigazine import Gigazine
-from newsbot.gizmode import Gizmode
+from newsbot.gizmodo import Gizmodo
 from newsbot.hatena import Hatena
 from newsbot.itmedia import Itmedia
 from newsbot.lifehacker import Lifehacker
@@ -18,7 +18,7 @@ rss_list = [
     Gigazine(),
     Codezine(),
     Zenn(),
-    Gizmode(),
+    Gizmodo(),
     Hatena(),
     Itmedia(),
     Lifehacker(),

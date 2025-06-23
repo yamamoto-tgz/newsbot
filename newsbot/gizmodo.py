@@ -4,11 +4,11 @@ from newsbot.item import Item
 from newsbot.rss import Rss
 
 
-class Gizmode(Rss):
+class Gizmodo(Rss):
     def __init__(self):
-        name = "gizmode"
+        name = "gizmodo"
         url = "https://www.gizmodo.jp/index.xml"
-        path = "./rss/gizmode.xml"
+        path = "./rss/gizmodo.xml"
         super().__init__(name, url, path)
 
     def items(self):
