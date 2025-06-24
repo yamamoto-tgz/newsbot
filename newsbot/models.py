@@ -56,6 +56,6 @@ class Article:
     @staticmethod
     def find_all_order_by_published_desc():
         with sqlite3.connect(DATABASE) as con:
-            sql = "SELECT * FROM articles ORDER BY published DESC"
+            sql = "SELECT * FROM articles ORDER BY datetime(published) DESC"
             rows = con.cursor().execute(sql).fetchall()
             return [Article(*row) for row in rows]
