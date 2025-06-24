@@ -8,12 +8,6 @@ $ cd newsbot
 $ pip install -r requirements.txt
 ```
 
-## Environment Variables
-
-| Name     | Required | Default |
-| -------- | -------- | ------- |
-| NB_PROXY | false    | None    |
-
 ## Run
 
 ```

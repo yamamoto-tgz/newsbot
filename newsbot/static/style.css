@@ -46,7 +46,7 @@ header {
   color: #00cc80;
 }
 
-.items {
+.articles {
   font-family: "Kaiso";
   width: 100%;
   display: flex;
@@ -56,7 +56,7 @@ header {
   gap: 26px;
 }
 
-.item {
+.article {
   background-color: #ffffff;
   font-size: 22px;
   display: flex;
@@ -65,27 +65,21 @@ header {
   width: 85%;
   min-height: 90px;
   padding: 24px;
-  box-shadow: 6px 6px #59d6f3;
+  box-shadow: 6px 6px #59d6f3, 6px 6px 20px #59d6f3;
 }
 
-.item > a {
+.article > a {
   color: #b000a6;
   font-family: "Kaiso";
   font-size: 36px;
   text-decoration: none;
 }
 
-.item > .meta {
+.article > .meta {
   color: #555555;
   display: flex;
   justify-content: space-between;
   font-family: "Technopollas";
   font-size: 18px;
   color: #3c3c3c;
-}
-
-.item > {
-  color: #1783c7;
-  font-size: 28px;
-  text-decoration: none;
 }

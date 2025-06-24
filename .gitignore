@@ -8,3 +8,4 @@ __pycache__
 # newsbot
 /xml
 newsbot.env
+newsbot.db*
