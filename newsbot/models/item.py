@@ -1,16 +1,17 @@
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 
 @dataclass
 class Item:
     title: str
     link: str
-    datetime: datetime
+    published: datetime
     source: str
 
     def time(self):
-        diff = datetime.now(timezone(timedelta(hours=9))) - self.datetime
+        diff = datetime.now(timezone.utc) - self.published
         seconds = diff.total_seconds()
 
         if seconds < 60:
@@ -21,8 +22,6 @@ class Item:
         elif seconds < 86400:
             hours = int(seconds // 3600)
             return f"{hours}h"
-        elif seconds < 7 * 86400:
+        else:
             days = int(seconds // 86400)
             return f"{days}d"
-        else:
-            return "ERROR"
