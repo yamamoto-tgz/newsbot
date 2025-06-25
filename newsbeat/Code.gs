@@ -15,9 +15,10 @@ function beat() {
     ["gihyo", "https://gihyo.jp/feed/rss2"],
   ];
 
-  channels.forEach((channel) =>
-    send(channel[1], `https://yama.pythonanywhere.com/xml/${channel[0]}`)
-  );
+  channels.forEach((channel) => {
+    const baseUrl = PropertiesService.getScriptProperties().getProperty("NB_API_BASE_URL");
+    send(channel[1], `${baseUrl}/xml/${channel[0]}`);
+  });
 }
 
 function send(src, dst) {
