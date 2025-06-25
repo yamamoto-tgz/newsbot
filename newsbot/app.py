@@ -32,10 +32,14 @@ def post_xml(channel):
     for entry in feedparser.parse(request.data).entries:
         title = entry.title
         link = entry.link
-        published = dateparser.parse(entry.updated).isoformat()
-        created = datetime.now(tz=timezone.utc).isoformat(timespec="seconds")
+        published = dateparser.parse(entry.updated)
+        created = datetime.now(tz=timezone.utc)
 
-        articles.append((channel, title, link, published, created))
+        now = datetime.now(tz=timezone.utc)
+        diff = now - published
+
+        if diff.days <= 30:
+            articles.append((channel, title, link, published.isoformat(), created.isoformat(timespec="seconds")))
 
     inserted_rows = Article.bulk_insert(articles)
     print(f"{channel}: {inserted_rows} rows are inserted")
