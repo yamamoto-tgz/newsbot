@@ -32,6 +32,18 @@ class TestNewsBot(unittest.TestCase):
     def test_hatena(self):
         self._test("hatena", "https://b.hatena.ne.jp/hotentry/it.rss")
 
+    def test_dznet(self):
+        self._test("dznet", "http://feed.japan.zdnet.com/rss/index.rdf")
+
+    def test_forest(self):
+        self._test("forest", "https://forest.watch.impress.co.jp/data/rss/1.0/wf/feed.rdf")
+
+    def test_gbusiness(self):
+        self._test("gbusiness", "https://www.gamebusiness.jp/rss20/index.rdf")
+
+    def test_gihyo(self):
+        self._test("gihyo", "https://gihyo.jp/feed/rss2")
+
     def _test(self, channel, url):
         # Get
         xml = requests.get(url).content

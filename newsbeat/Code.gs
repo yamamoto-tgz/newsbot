@@ -9,6 +9,10 @@ function beat() {
     ["lifehacker", "https://www.lifehacker.jp/feed/"],
     ["gigazine", "https://gigazine.net/news/rss_2.0/"],
     ["hatena", "https://b.hatena.ne.jp/hotentry/it.rss"],
+    ["dznet", "http://feed.japan.zdnet.com/rss/index.rdf"],
+    ["forest", "https://forest.watch.impress.co.jp/data/rss/1.0/wf/feed.rdf"],
+    ["gbusiness", "https://www.gamebusiness.jp/rss20/index.rdf"],
+    ["gihyo", "https://gihyo.jp/feed/rss2"],
   ];
 
   channels.forEach((channel) =>
