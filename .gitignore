@@ -6,6 +6,4 @@ __pycache__
 .vscode
 
 # newsbot
-/xml
-newsbot.env
 newsbot.db*
