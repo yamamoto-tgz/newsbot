@@ -1,5 +1,4 @@
 import sqlite3
-from dataclasses import dataclass
 from datetime import datetime, timezone
 
 import dateutil.parser as dateparser
@@ -7,13 +6,15 @@ import dateutil.parser as dateparser
 DATABASE = "newsbot.db"
 
 
-@dataclass
 class Article:
-    channel: str
-    title: str
-    link: str
-    published: datetime
-    created: datetime
+    def __init__(self, id=None, channel=None, title=None, link=None, published=None, created=None, read=None):
+        self.id: int = id
+        self.channel: str = channel
+        self.title: str = title
+        self.link: str = link
+        self.published: datetime = published
+        self.created: datetime = created
+        self.read: bool = read
 
     def time(self):
         diff = datetime.now(timezone.utc) - self.published.replace(tzinfo=timezone.utc)
@@ -34,23 +35,57 @@ class Article:
     def is_newer_than(self, threshold):
         return self.published > threshold
 
+    def save(self):
+        sql = """
+            UPDATE articles
+            SET channel = ?, title = ?, link = ?, published = ?, created = ?, read = ?
+            WHERE id = ?
+        """
+        values = (
+            self.channel,
+            self.title,
+            self.link,
+            self.published,
+            self.created,
+            self.read,
+            self.id,
+        )
+
+        with sqlite3.connect(DATABASE) as con:
+            con.execute(sql, values)
+
     @staticmethod
     def from_row(row):
         return Article(*row)
 
     @staticmethod
     def create_table():
+        sql = """
+            CREATE TABLE IF NOT EXISTS articles (
+                id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                channel TEXT, 
+                title TEXT, 
+                link TEXT, 
+                published TIMESTAMP, 
+                created TIMESTAMP, 
+                read BOOLEAN, 
+                UNIQUE (channel, title, link)
+            )
+        """
         with sqlite3.connect(DATABASE) as con:
             cursor = con.cursor()
-            cursor.execute(
-                "CREATE TABLE IF NOT EXISTS articles (channel TEXT, title TEXT, link TEXT, published TIMESTAMP, created TIMESTAMP, PRIMARY KEY (channel, title, link))"
-            )
+            cursor.execute(sql)
 
     @staticmethod
     def bulk_insert(articles):
+        sql = """
+            INSERT INTO articles (channel, title, link, published, created, read) 
+                VALUES (?, ?, ?, datetime(?), datetime(?), ?) 
+                ON CONFLICT DO NOTHING
+        """
+        values = [[v for k, v in article.__dict__.items() if k != "id"] for article in articles]
+
         with sqlite3.connect(DATABASE) as con:
-            sql = f"INSERT INTO articles (channel, title, link, published, created) VALUES (?, ?, ?, datetime(?), datetime(?)) ON CONFLICT DO NOTHING"
-            values = [list(article.__dict__.values()) for article in articles]
             rowcount = con.cursor().executemany(sql, values).rowcount
             return rowcount
 
@@ -62,8 +97,15 @@ class Article:
             return rowcount
 
     @staticmethod
-    def find_all_order_by_published_desc():
+    def find_by_id(id):
         with sqlite3.connect(DATABASE, detect_types=sqlite3.PARSE_DECLTYPES) as con:
-            sql = "SELECT * FROM articles ORDER BY published DESC"
+            sql = "SELECT * FROM articles WHERE id = ?"
+            row = con.cursor().execute(sql, [id]).fetchone()
+            return Article.from_row(row)
+
+    @staticmethod
+    def find_all_order_by_read_asc_published_desc():
+        with sqlite3.connect(DATABASE, detect_types=sqlite3.PARSE_DECLTYPES) as con:
+            sql = "SELECT * FROM articles ORDER BY read ASC, published DESC"
             rows = con.cursor().execute(sql).fetchall()
             return [Article.from_row(row) for row in rows]

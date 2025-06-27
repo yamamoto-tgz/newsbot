@@ -68,6 +68,10 @@ header {
   box-shadow: 6px 6px #59d6f3, 6px 6px 20px #59d6f3;
 }
 
+.article.is-read {
+  box-shadow: none;
+}
+
 .article > a {
   color: #b000a6;
   font-family: "Kaiso";

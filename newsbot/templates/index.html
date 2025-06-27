@@ -5,6 +5,7 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
+    <script src="{{ url_for('static', filename='newsbot.js') }}"></script>
     <title>NewsBot</title>
   </head>
   <body>
@@ -22,7 +23,10 @@
 
     <div class="articles">
       {% for article in articles %}
-      <div class="article">
+      <div
+        class="article{% if article.read == 1 %} is-read{% endif %}"
+        id="{{ article.id }}"
+      >
         <span class="meta">
           <span>{{ article.channel }}</span>
           <span>{{ article.time() }}</span>

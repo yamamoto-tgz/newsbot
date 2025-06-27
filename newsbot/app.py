@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 
 import dateutil.parser as dateparser
 import feedparser
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, render_template, request
 
 from newsbot.models import Article
 
@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    articles = Article.find_all_order_by_published_desc()
+    articles = Article.find_all_order_by_read_asc_published_desc()
 
     counter = {}
     for article in articles:
@@ -36,6 +36,7 @@ def post_xml(channel):
             link=entry.link,
             published=dateparser.parse(entry.updated),
             created=datetime.now(tz=timezone.utc),
+            read=False,
         )
 
         threshold = datetime.now(timezone.utc) - timedelta(days=31)
@@ -50,3 +51,15 @@ def post_xml(channel):
     print(f"{channel} {deleted_rows} rows are deleted")
 
     return "OK", 201
+
+
+@app.route("/articles/<int:id>", methods=["POST"])
+def update(id):
+    article = Article.find_by_id(id)
+
+    for k, v in request.get_json().items():
+        setattr(article, k, v)
+
+    article.save()
+
+    return jsonify(article.__dict__), 200
