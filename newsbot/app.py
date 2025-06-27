@@ -30,21 +30,23 @@ def post_xml(channel):
     articles = []
 
     for entry in feedparser.parse(request.data).entries:
-        title = entry.title
-        link = entry.link
-        published = dateparser.parse(entry.updated)
-        created = datetime.now(tz=timezone.utc)
+        article = Article(
+            channel=channel,
+            title=entry.title,
+            link=entry.link,
+            published=dateparser.parse(entry.updated),
+            created=datetime.now(tz=timezone.utc),
+        )
 
-        now = datetime.now(tz=timezone.utc)
-        diff = now - published
+        threshold = datetime.now(timezone.utc) - timedelta(days=31)
 
-        if diff.days <= 30:
-            articles.append((channel, title, link, published.isoformat(), created.isoformat(timespec="seconds")))
+        if article.is_newer_than(threshold):
+            articles.append(article)
 
     inserted_rows = Article.bulk_insert(articles)
     print(f"{channel}: {inserted_rows} rows are inserted")
 
-    deleted_rows = Article.delete_older_than((datetime.now(timezone.utc) - timedelta(hours=24)).isoformat())
+    deleted_rows = Article.delete_older_than((datetime.now(timezone.utc) - timedelta(hours=24)))
     print(f"{channel} {deleted_rows} rows are deleted")
 
     return "OK", 201
