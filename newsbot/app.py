@@ -47,7 +47,7 @@ def post_xml(channel):
     inserted_rows = Article.bulk_insert(articles)
     print(f"{channel}: {inserted_rows} rows are inserted")
 
-    deleted_rows = Article.delete_older_than((datetime.now(timezone.utc) - timedelta(hours=24)))
+    deleted_rows = Article.delete_older_than((datetime.now(timezone.utc) - timedelta(days=31)))
     print(f"{channel} {deleted_rows} rows are deleted")
 
     return "OK", 201
