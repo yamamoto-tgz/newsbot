@@ -20,7 +20,7 @@ Session = sessionmaker(bind=engine)
 def job():
     with Session() as session:
         threshold_date = datetime.now(timezone.utc) - timedelta(days=30)
-        rowcount = session.query(Article).filter(Article.created <= threshold_date).delete()
+        rowcount = session.query(Article).filter(Article.published <= threshold_date).delete()
         session.commit()
         print(f"deleted: {rowcount}")
 
