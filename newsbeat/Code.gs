@@ -1,6 +1,5 @@
 function beat() {
   const channels = [
-    ["nhk", "https://www.nhk.or.jp/rss/news/cat0.xml"],
     ["atmarkit", "https://rss.itmedia.co.jp/rss/2.0/ait.xml"],
     ["codezine", "https://codezine.jp/rss/new/20/index.xml"],
     ["gizmodo", "https://www.gizmodo.jp/index.xml"],
@@ -13,6 +12,7 @@ function beat() {
     ["forest", "https://forest.watch.impress.co.jp/data/rss/1.0/wf/feed.rdf"],
     ["gbusiness", "https://www.gamebusiness.jp/rss20/index.rdf"],
     ["gihyo", "https://gihyo.jp/feed/rss2"],
+    ["nhk", "https://www.nhk.or.jp/rss/news/cat0.xml"],
   ];
 
   channels.forEach((channel) => {
@@ -22,7 +22,7 @@ function beat() {
 }
 
 function send(src, dst) {
-  xml = UrlFetchApp.fetch(src).getContentText();
+  const xml = UrlFetchApp.fetch(src).getContentText();
 
   UrlFetchApp.fetch(dst, {
     method: "post",
